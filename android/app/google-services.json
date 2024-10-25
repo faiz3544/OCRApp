@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "438006359636",
+    "project_id": "ocrapp-ad4ce",
+    "storage_bucket": "ocrapp-ad4ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:438006359636:android:7fc84a5bed3284e817afc1",
+        "android_client_info": {
+          "package_name": "com.example.finalyearproj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "438006359636-2pk7c0k2anpmiuibs1hvrspp22tj0ovn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finalyearproj",
+            "certificate_hash": "91d2ae455a5e4ebb528070b3c2b97c9db8a16230"
+          }
+        },
+        {
+          "client_id": "438006359636-3ulsddv0jt50nj7c8sfopm7eq71makpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7Ri6Oj4yIAs-98B6yf0WV9dWp87jYHXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "438006359636-3ulsddv0jt50nj7c8sfopm7eq71makpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:finalyearproj/widgets/custom_text_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  // Sign-in method using Firebase Auth
+  Future<void> _signInWithEmailAndPassword() async {
+    try {
+      await _auth.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      Navigator.pushReplacementNamed(context, '/home');
+    } catch (e) {
+      print(e);
+      // Handle login error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login failed: ${e.toString()}')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +76,16 @@ class LoginScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Email Field
-                    CustomTextField(hintText: 'Email'),
+                    CustomTextField(
+                      controller: emailController,
+                      hintText: 'Email',
+                    ),
                     // Password Field
-                    CustomTextField(hintText: 'Password', obscureText: true),
+                    CustomTextField(
+                      controller: passwordController,
+                      hintText: 'Password',
+                      obscureText: true,
+                    ),
                     const SizedBox(height: 20),
                     const Align(
                       alignment: Alignment.centerRight,
@@ -80,9 +114,7 @@ class LoginScreen extends StatelessWidget {
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,
                         ),
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(context, '/home');
-                        },
+                        onPressed: _signInWithEmailAndPassword,
                         child: const Text(
                           'SIGN IN',
                           style: TextStyle(
@@ -94,27 +126,32 @@ class LoginScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 120),
-                    const Align(
-                      alignment: Alignment.bottomRight,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Don't have an account?",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/signup');
+                      },
+                      child: const Align(
+                        alignment: Alignment.bottomRight,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Don't have an account?",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "Sign up",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                              color: Colors.black,
+                            Text(
+                              "Sign up",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
